@@ -38,7 +38,7 @@ $(document).ready(function(){
     test("check enter submits form", function() {
         expect(1);
 
-        $('#simplefixture textarea').shiftenter();
+        $('#simplefixture textarea').ctrlenter();
 
         $('#simplefixture form').bind('submit', function() {
             ok(true, "form gets submitted");
@@ -52,7 +52,7 @@ $(document).ready(function(){
     test("check shift+enter doesn't submit form", function() {
         expect(0);
 
-        $('#simplefixture textarea').shiftenter();
+        $('#simplefixture textarea').ctrlenter();
 
         $('#simplefixture form').bind('submit', function() {
             ok(false, "form mustn't get submitted");
@@ -67,7 +67,7 @@ $(document).ready(function(){
     test("check ctrl+enter doesn't submit form", function() {
         expect(0);
 
-        $('#simplefixture textarea').shiftenter({metaKey: 'ctrl'});
+        $('#simplefixture textarea').ctrlenter({metaKey: 'ctrl'});
 
         $('#simplefixture form').bind('submit', function() {
             ok(false, "form mustn't get submitted");
@@ -83,7 +83,7 @@ $(document).ready(function(){
         test("check shift+enter generates line breaks", function() {
             expect(1);
 
-            $('#simplefixture textarea').shiftenter();
+            $('#simplefixture textarea').ctrlenter();
 
             $('#simplefixture form').bind('submit', function() {
                 ok(false, "form mustn't get submitted");
@@ -104,7 +104,7 @@ $(document).ready(function(){
         test("check ctrl+enter generates line breaks", function() {
             expect(1);
 
-            $('#simplefixture textarea').shiftenter({metaKey: 'ctrl'});
+            $('#simplefixture textarea').ctrlenter({metaKey: 'ctrl'});
 
             $('#simplefixture form').bind('submit', function() {
                 ok(false, "form mustn't get submitted");
@@ -128,12 +128,12 @@ $(document).ready(function(){
     test("check hint visibility", function() {
         expect(2);
         
-        $('#simplefixture textarea').shiftenter();
+        $('#simplefixture textarea').ctrlenter();
 
-        ok(! $('#simplefixture .shiftenter-text').is(':visible'), "hint is hidden by default");
+        ok(! $('#simplefixture .ctrlenter-text').is(':visible'), "hint is hidden by default");
 
         $('#simplefixture textarea').focus();
-        ok($('#simplefixture .shiftenter').is(':visible'), "hint shows on focus");
+        ok($('#simplefixture .ctrlenter').is(':visible'), "hint shows on focus");
 
     });
 
@@ -141,9 +141,9 @@ $(document).ready(function(){
         expect(1);
         
         var msg = 'test message';
-        $('#simplefixture textarea').shiftenter({'hint': msg}).focus();
+        $('#simplefixture textarea').ctrlenter({'hint': msg}).focus();
 
-        equal($('#simplefixture .shiftenter').text(), msg, "hint setting should be honoured");
+        equal($('#simplefixture .ctrlenter').text(), msg, "hint setting should be honoured");
     });
 
     module("Size");
@@ -151,13 +151,13 @@ $(document).ready(function(){
     test("check positioning is in textarea's bounds", function() {
         expect(4);
         
-        $('#simplefixture textarea').shiftenter().focus();
+        $('#simplefixture textarea').ctrlenter().focus();
 
-        ok($('#simplefixture .shiftenter').position().left >= $('#simplefixture textarea').position().left, "left margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().top >= $('#simplefixture textarea').position().top, "top margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth() 
+        ok($('#simplefixture .ctrlenter').position().left >= $('#simplefixture textarea').position().left, "left margin is inside textarea");
+        ok($('#simplefixture .ctrlenter').position().top >= $('#simplefixture textarea').position().top, "top margin is inside textarea");
+        ok($('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth()
            <= $('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth(), "right margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight() 
+        ok($('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight()
            <= $('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight(), "bottom margin is inside textarea");
 
     });
@@ -165,45 +165,45 @@ $(document).ready(function(){
     asyncTest("check increasing size keeps hint position", function() {
         expect(12);
         
-        $('#simplefixture textarea').shiftenter().focus();
+        $('#simplefixture textarea').ctrlenter().focus();
         
         var position_right  = ($('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth()
-                              - $('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth()),
+                              - $('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth()),
             position_bottom = ($('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight()
-                               - $('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight());
+                               - $('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight());
 
         $('#simplefixture textarea').width($('#simplefixture textarea').width() + 100).trigger("resize");
         setTimeout(function() {
         // Check bounds
-        ok($('#simplefixture .shiftenter').position().left >= $('#simplefixture textarea').position().left, "left margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().top >= $('#simplefixture textarea').position().top, "top margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth() 
+        ok($('#simplefixture .ctrlenter').position().left >= $('#simplefixture textarea').position().left, "left margin is inside textarea");
+        ok($('#simplefixture .ctrlenter').position().top >= $('#simplefixture textarea').position().top, "top margin is inside textarea");
+        ok($('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth()
            <= $('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth(), "right margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight() 
+        ok($('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight()
            <= $('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight(), "bottom margin is inside textarea");
         // Check position relative to bottom right corner
         equal($('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth()
-              - $('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth(),
+              - $('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth(),
               position_right);
         equal($('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight()
-              - $('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight(),
+              - $('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight(),
               position_bottom);
 
         $('#simplefixture textarea').height($('#simplefixture textarea').height() + 100).trigger("resize");
         setTimeout(function() {
         // Check bounds
-        ok($('#simplefixture .shiftenter').position().left >= $('#simplefixture textarea').position().left, "left margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().top >= $('#simplefixture textarea').position().top, "top margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth() 
+        ok($('#simplefixture .ctrlenter').position().left >= $('#simplefixture textarea').position().left, "left margin is inside textarea");
+        ok($('#simplefixture .ctrlenter').position().top >= $('#simplefixture textarea').position().top, "top margin is inside textarea");
+        ok($('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth()
            <= $('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth(), "right margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight() 
+        ok($('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight()
            <= $('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight(), "bottom margin is inside textarea");
         // Check position relative to bottom right corner
         equal($('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth()
-              - $('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth(),
+              - $('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth(),
               position_right);
         equal($('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight()
-              - $('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight(),
+              - $('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight(),
               position_bottom);
 
         start();
@@ -214,30 +214,30 @@ $(document).ready(function(){
     asyncTest("check decreasing size keeps hint position", function() {
         expect(6);
         
-        $('#simplefixture textarea').shiftenter().focus();
+        $('#simplefixture textarea').ctrlenter().focus();
 
         var position_right  = ($('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth()
-                              - $('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth()),
+                              - $('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth()),
             position_bottom = ($('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight()
-                               - $('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight());
+                               - $('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight());
 
         $('#simplefixture textarea').height($('#simplefixture textarea').height() - 100).trigger("resize");
         $('#simplefixture textarea').width($('#simplefixture textarea').width() - 100).trigger("resize");
 
         setTimeout(function() {
         // Check bounds
-        ok($('#simplefixture .shiftenter').position().left >= $('#simplefixture textarea').position().left, "left margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().top >= $('#simplefixture textarea').position().top, "top margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth() 
+        ok($('#simplefixture .ctrlenter').position().left >= $('#simplefixture textarea').position().left, "left margin is inside textarea");
+        ok($('#simplefixture .ctrlenter').position().top >= $('#simplefixture textarea').position().top, "top margin is inside textarea");
+        ok($('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth()
            <= $('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth(), "right margin is inside textarea");
-        ok($('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight() 
+        ok($('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight()
            <= $('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight(), "bottom margin is inside textarea");
         // Check position relative to bottom right corner
         equal($('#simplefixture textarea').position().left + $('#simplefixture textarea').outerWidth()
-              - $('#simplefixture .shiftenter').position().left + $('#simplefixture .shiftenter').outerWidth(),
+              - $('#simplefixture .ctrlenter').position().left + $('#simplefixture .ctrlenter').outerWidth(),
               position_right);
         equal($('#simplefixture textarea').position().top + $('#simplefixture textarea').outerHeight()
-              - $('#simplefixture .shiftenter').position().top + $('#simplefixture .shiftenter').outerHeight(),
+              - $('#simplefixture .ctrlenter').position().top + $('#simplefixture .ctrlenter').outerHeight(),
               position_bottom);
 
         start();

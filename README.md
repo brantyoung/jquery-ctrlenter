@@ -1,4 +1,4 @@
-jquery-ctrlenter is a jQuery plugin that makes it easy to allow submitting a form with textareas using a simple press on ```'Enter'```. Line breaks (newlines) in these input fields can then be achieved by pressing ```'Shift+Enter'``` (alternatively ```'Ctrl+Enter'```). Additionally a hint is shown.
+jquery-ctrlenter is a jQuery plugin that makes it easy to allow submitting a form with textareas using a press on ```'Ctrl+Enter' / '⌘+Enter'```. Additionally a hint is shown.
 
 Usage:
 ------
@@ -15,13 +15,12 @@ See ```example.html``` for an example usage.
 Settings:
 ---------
 
-    $('textarea').ctrlenter({
-        focusClass: 'ctrlenter',             /* CSS class used on focus */
-        inactiveClass: 'ctrlenterInactive',  /* CSS class used when no focus */
-        hint: 'Shift+Enter for line break',   /* hint shown */
-        metaKey: 'shift',                     /* meta key that triggers a line-break, allowed values: 'shift', 'ctrl' */
-        pseudoPadding: '0 10'                 /* padding (bottom, right) of hint text */
-    });
+    settings: {
+        focusClass: 'ctrlenter',
+        inactiveClass: 'ctrlenterInactive',
+        hint: '<kbd>Ctrl - ↵</kbd> or <kbd>⌘ - ↵</kbd> for submit',
+        pseudoPadding: '0 10' // Pseudo-padding to work around webkit/firefox4 resize handler being hidden, follows the CSS padding style
+    },
 
 You can adjust the style in ```jquery.ctrlenter.css```
 
@@ -32,22 +31,10 @@ Other things you might want to use along with jquery-ctrlenter:
   * jquery-resize (http://benalman.com/projects/jquery-resize-plugin/) if you plan on doing some special resizing on the textarea.
 
 
-Unit tests:
------------
-
-Point your browser to ```test/index.html``` to start the QUnit tests. ![current build status](https://secure.travis-ci.org/cburgmer/jquery-ctrlenter.png)
-
 Changelog:
 ----------
 
-  * MASTER: Fix test cases to work with Firefox 6.0
-  * 0.0.4: Also allow for CTRL instead of SHIFT, fix resize for Google Chrome
-  * 0.0.3: Change the way how the hint is positioned and improve resize handling.
-  * 0.0.2: React to textarea resizes and fix position of hint
-  * 0.0.1: Initial release
+  * 0.0.6: switch to use ```'Ctrl+Enter' / '⌘+Enter'``` for submit form
+  * 0.0.5: fork from https://github.com/cburgmer/jquery-shiftenter
 
 Licensed under the MIT-License
-
-Report issues to https://github.com/cburgmer/jquery-ctrlenter/issues
-
-Contact me under Christoph Burgmer (cburgmer -[at]- ira [*dot*] uka [*dot*] de)

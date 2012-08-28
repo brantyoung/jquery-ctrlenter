@@ -33,7 +33,7 @@
             settings: {
                 focusClass: 'ctrlenter',
                 inactiveClass: 'ctrlenterInactive',
-                hint: '^/⌘ + ↵ for submit',
+                hint: '<kbd class="ctrlenter">Ctrl - ↵</kbd> or <kbd class="ctrlenter">⌘ - ↵</kbd> for submit',
                 pseudoPadding: '0 10' // Pseudo-padding to work around webkit/firefox4 resize handler being hidden, follows the CSS padding style
             },
             get_padding: function (padding) {
